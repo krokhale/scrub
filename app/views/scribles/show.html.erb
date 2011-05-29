@@ -1,0 +1,12 @@
+<%= content_for :question  do %>
+	<%= @scrible.question %>
+<% end %>
+
+<%= content_for :counts  do %>
+	<%= "comments : #{@comments}"%>
+	<%= "branches : #{@branches}"%>
+<% end %>
+
+<%= content_for :poll  do %>
+	<%= "polls : #{@polls.count}" %>
+<% end %>

@@ -10,6 +10,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20110529225251) do
+
+  create_table "branches", :force => true do |t|
+    t.text     "content"
+    t.integer  "scrible_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "comments", :force => true do |t|
+    t.text     "content"
+    t.integer  "scrible_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "polls", :force => true do |t|
+    t.text     "question"
+    t.boolean  "active"
+    t.integer  "scrible_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "scribles", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "question"
+  end
 
 end

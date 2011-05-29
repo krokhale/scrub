@@ -7,6 +7,8 @@ gem 'rails', '3.0.7'
 
 gem 'sqlite3'
 gem 'rake', '~> 0.8.7'
+gem 'rubytree', :require => 'tree'
+gem 'acts-as-taggable-on'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -20,7 +22,7 @@ gem 'rake', '~> 0.8.7'
 
 # Bundle the extra gems:
 # gem 'bj'
-# gem 'nokogiri'
+#  gem 'nokogiri'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 
@@ -28,13 +30,17 @@ gem 'rake', '~> 0.8.7'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
-  gem 'rspec-rails', '2.0.1'
-  gem 'jasmine', '1.0.2.0'
+  gem 'rspec-rails'
+  gem 'jasmine'
+  gem 'webrat'
 
-  gem 'cucumber-rails', '0.4.1'
-  gem 'capybara', '0.4.1.2'
-  gem 'database_cleaner', '0.6.7'
-  gem 'factory_girl_rails', '1.0.1'
+  gem 'cucumber-rails'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
   gem 'autotest-rails'
+  gem 'vcr'
+  gem 'webmock'
+  gem 'faker'
 
 end
