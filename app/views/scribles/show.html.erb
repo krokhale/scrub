@@ -14,3 +14,9 @@
 <%= content_for :tags  do %>
 	<%= @scrible.tags.collect(&:name).join(',') %>
 <% end %>
+
+<%= content_for :similar  do %>
+	<% @similar.each do |scrible| %>
+    <%= scrible.question %>
+	<% end %>
+<% end %>

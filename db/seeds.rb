@@ -6,17 +6,33 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
-  scrible = Scrible.create!(:question => "how are you?")
+  def generate_tags
+    @tags = []
+    4.times { @tags << Faker::Name.name }
+    @tags.join(",")
+  end
   
-  branch1 = Branch.create!(:content => "first branch", 
-                           :scrible_id => scrible.id )
+  def tags(n)
+    if (n%2).zero?
+      return "hey, how, are, you"
+    else
+      return generate_tags
+    end
+  end
   
-  branch2 = Branch.create!(:content => "second branch", 
-                         :scrible_id => scrible.id )
+  10.times do |n|
+    scrible = Scrible.create!(:question => Faker::Lorem.words(3).join(' ') + "?",
+                               :tag_list => tags(n))
+    
+    3.times do
+      Branch.create!(:content => "first branch", 
+                               :scrible_id => scrible.id )
+      Comment.create!(:content => "first comment", 
+                                 :scrible_id => scrible.id )
+      Poll.create!(:question => "first poll", 
+                                 :scrible_id => scrible.id )
+      end
+  end
   
-  comment1 = Comment.create!(:content => "first comment", 
-                           :scrible_id => scrible.id )
   
-  comment2 = Comment.create!(:content => "second comment", 
-                           :scrible_id => scrible.id )    
-                       
+ 

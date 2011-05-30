@@ -5,6 +5,7 @@ class ScriblesController < ApplicationController
     @branches = @scrible.branches.count
     @comments = @scrible.comments.count
     @polls = @scrible.polls
+    @similar = @scrible.find_related_tags
   end
   
 end

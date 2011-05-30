@@ -1,6 +1,10 @@
+Factory.sequence :question do
+  Faker::Lorem.words(3).join(' ') + "?"
+end
+
 
 Factory.define :scrible do |s|
-  s.question "how are you?"
+  s.question { Factory.next(:question) }
 end
 
 Factory.define :comment do |c|

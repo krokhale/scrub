@@ -5,18 +5,26 @@ describe ScriblesController do
   
   describe "GET show" do
     
-    let(:scrible) {Factory :scrible}
+    let(:tags) { @tags = []
+                 4.times { @tags << Faker::Name.name}
+                 @tags.join(",")
+                }
+    5.times { |n| let("scrible#{n+1}".to_sym) {Factory :scrible} }
     
     before do
       branch = Factory.build(:branch, :scrible => nil)
       comment = Factory.build(:comment, :scrible => nil)
       poll = Factory.build(:poll, :scrible  => nil)
-      scrible.branches << branch << branch.clone
-      scrible.comments << comment << comment.clone
-      scrible.polls << poll << poll.clone
-      scrible.tag_list = "how, cool, is, this"
-      scrible.save
-      get :show, :id => scrible.id
+      scrible1.branches << branch << branch.clone
+      scrible1.comments << comment << comment.clone
+      scrible1.polls << poll << poll.clone
+      scrible1.tag_list = tags
+      scrible1.save
+      
+      scrible2.tag_list = tags;scrible2.save
+      scrible3.tag_list = tags;scrible3.save
+      
+      get :show, :id => scrible1.id
     end
     
     
@@ -25,8 +33,8 @@ describe ScriblesController do
     end
     
     it "should display the question" do
-      question = scrible.question
-      assigns(:scrible).should == scrible
+      question = scrible1.question
+      assigns(:scrible).should == scrible1
       response.status.should == 200
       response.body.should match(/#{question}/)   
     end
@@ -43,16 +51,16 @@ describe ScriblesController do
     end
     
     it "should display the poll" do
-      polls = scrible.polls
+      polls = scrible1.polls
       assigns(:polls).should == polls
       response.body.should match(/polls : 2/)
       response.should be_success
     end
     
     it "should display the tags" do
-      scrible.tags.count.should == 4
+      scrible1.tags.count.should == 4
       puts response.body
-      response.body.should match(/#{scrible.tags}/)
+      response.body.should match(/#{scrible1.tags}/)
     end
     
     it "should display the summary" do
@@ -60,7 +68,10 @@ describe ScriblesController do
     end
     
     it "should display similar scribles" do
-      
+      related_scribles = scrible1.find_related_tags
+      related_scribles.should include(scrible2,scrible3)
+      response.body.should match(/#{scrible2.question}/)
+      response.body.should match(/#{scrible3.question}/)
     end
     
   end
