@@ -29,8 +29,9 @@
                                :scrible_id => scrible.id )
       Comment.create!(:content => "first comment", 
                                  :scrible_id => scrible.id )
-      Poll.create!(:question => "first poll", 
+      poll = Poll.create!(:question => "first poll", 
                                  :scrible_id => scrible.id )
+      2.times { PollOption.create!(:content => "first option", :poll_id => poll.id)   }
       end
   end
   

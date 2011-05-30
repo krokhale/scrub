@@ -22,3 +22,8 @@ Factory.define :poll do |p|
   p.active true
   p.association(:scrible)
 end
+
+Factory.define :poll_option do |b|
+  b.content "first option"
+  b.association(:poll)
+end
