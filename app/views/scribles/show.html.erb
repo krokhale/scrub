@@ -10,3 +10,7 @@
 <%= content_for :poll  do %>
 	<%= "polls : #{@polls.count}" %>
 <% end %>
+
+<%= content_for :tags  do %>
+	<%= @scrible.tags.collect(&:name).join(',') %>
+<% end %>

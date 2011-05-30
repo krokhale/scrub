@@ -14,6 +14,7 @@ describe ScriblesController do
       scrible.branches << branch << branch.clone
       scrible.comments << comment << comment.clone
       scrible.polls << poll << poll.clone
+      scrible.tag_list = "how, cool, is, this"
       scrible.save
       get :show, :id => scrible.id
     end
@@ -49,7 +50,9 @@ describe ScriblesController do
     end
     
     it "should display the tags" do
-      
+      scrible.tags.count.should == 4
+      puts response.body
+      response.body.should match(/#{scrible.tags}/)
     end
     
     it "should display the summary" do
