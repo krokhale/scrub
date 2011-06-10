@@ -6,7 +6,7 @@ class ScriblesController < ApplicationController
     @comments = @scrible.comments.count
     @polls = @scrible.polls
     @similar = @scrible.find_related_tags
-    @poll_options = @polls.collect(&:poll_options)
+    @poll_options = @polls.collect(&:poll_options).flatten!
   end
   
 end

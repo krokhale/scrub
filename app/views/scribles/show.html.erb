@@ -9,6 +9,9 @@
 
 <%= content_for :poll  do %>
 	<%= "polls : #{@polls.count}" %>
+	<% @poll_options.each do |option| %>
+	<%= option.content %>
+	<% end %>
 <% end %>
 
 <%= content_for :tags  do %>

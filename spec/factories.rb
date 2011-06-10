@@ -27,3 +27,12 @@ Factory.define :poll_option do |b|
   b.content "first option"
   b.association(:poll)
 end
+
+
+
+
+
+
+
+
+

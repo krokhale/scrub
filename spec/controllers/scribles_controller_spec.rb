@@ -16,6 +16,7 @@ describe ScriblesController do
       comment = Factory.build(:comment, :scrible => nil)
       poll = Factory.build(:poll, :scrible  => nil)
       poll_option = Factory.build(:poll_option, :poll => nil)
+
       poll.poll_options << poll_option << poll_option.clone
       scrible1.branches << branch << branch.clone
       scrible1.comments << comment << comment.clone
@@ -64,11 +65,12 @@ describe ScriblesController do
       end
 
       it "should display the poll options" do
+        assigns(:poll_options).flatten.first.class.should == PollOption
         assigns(:poll_options).count.should == 2
+        response.body.should match(/first option/)
       end
 
     end
-
 
 
     it "should display the tags" do
@@ -76,10 +78,8 @@ describe ScriblesController do
       puts response.body
       response.body.should match(/#{scrible1.tags}/)
     end
+    
 
-    it "should display the summary" do
-
-    end
 
     it "should display similar scribles" do
       related_scribles = scrible1.find_related_tags
